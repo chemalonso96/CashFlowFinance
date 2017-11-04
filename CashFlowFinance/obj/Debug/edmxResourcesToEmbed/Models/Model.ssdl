@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CashFlowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AFP">
+    <Key>
+      <PropertyRef Name="AFPId" />
+    </Key>
+    <Property Name="AFPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Porcentaje" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="CuentaId" />
+    </Key>
+    <Property Name="CuentaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FamiliaId" Type="int" />
+    <Property Name="TasaId" Type="int" />
+    <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contrasenia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ahorro" Type="float" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="TerminosCondiciones" Type="int" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Familia">
+    <Key>
+      <PropertyRef Name="FamiliaId" />
+    </Key>
+    <Property Name="FamiliaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreGeneral" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CantidadIntegrantes" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gasto">
+    <Key>
+      <PropertyRef Name="GastoId" />
+    </Key>
+    <Property Name="GastoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoGastoId" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="FaimliaId" Type="int" Nullable="false" />
+    <Property Name="Costo" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Impuesto">
+    <Key>
+      <PropertyRef Name="ImpuestoId" />
+    </Key>
+    <Property Name="ImpuestoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Porcentaje" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Miembro">
+    <Key>
+      <PropertyRef Name="MiembroId" />
+    </Key>
+    <Property Name="MiembroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ocupacion">
+    <Key>
+      <PropertyRef Name="OcupacionId" />
+    </Key>
+    <Property Name="OcupacionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Periodo">
+    <Key>
+      <PropertyRef Name="PeriodoId" />
+    </Key>
+    <Property Name="PeriodoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CantDias" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasa">
+    <Key>
+      <PropertyRef Name="TasaId" />
+    </Key>
+    <Property Name="TasaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PeriodoId" Type="int" Nullable="false" />
+    <Property Name="Valor" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoGasto">
+    <Key>
+      <PropertyRef Name="TipoGastoId" />
+    </Key>
+    <Property Name="TipoGastoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cuenta_Familia">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="FamiliaId" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="FamiliaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_Tasa">
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasa">
+        <PropertyRef Name="TasaId" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="TasaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gasto_Familia">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="FamiliaId" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="FaimliaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gasto_TipoGasto">
+    <End Role="TipoGasto" Type="Self.TipoGasto" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoGasto">
+        <PropertyRef Name="TipoGastoId" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="TipoGastoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasa_Periodo">
+    <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Periodo">
+        <PropertyRef Name="PeriodoId" />
+      </Principal>
+      <Dependent Role="Tasa">
+        <PropertyRef Name="PeriodoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CashFlowModelStoreContainer">
+    <EntitySet Name="AFP" EntityType="Self.AFP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Familia" EntityType="Self.Familia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gasto" EntityType="Self.Gasto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Impuesto" EntityType="Self.Impuesto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Miembro" EntityType="Self.Miembro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Periodo" EntityType="Self.Periodo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasa" EntityType="Self.Tasa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoGasto" EntityType="Self.TipoGasto" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cuenta_Familia" Association="Self.FK_Cuenta_Familia">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_Tasa" Association="Self.FK_Cuenta_Tasa">
+      <End Role="Tasa" EntitySet="Tasa" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gasto_Familia" Association="Self.FK_Gasto_Familia">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gasto_TipoGasto" Association="Self.FK_Gasto_TipoGasto">
+      <End Role="TipoGasto" EntitySet="TipoGasto" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasa_Periodo" Association="Self.FK_Tasa_Periodo">
+      <End Role="Periodo" EntitySet="Periodo" />
+      <End Role="Tasa" EntitySet="Tasa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

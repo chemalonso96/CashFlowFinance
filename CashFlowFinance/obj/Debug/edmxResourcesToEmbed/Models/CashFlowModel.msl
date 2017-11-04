@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CashFlowModelStoreContainer" CdmEntityContainer="CashFlowEntities">
+    <EntitySetMapping Name="AFP">
+      <EntityTypeMapping TypeName="CashFlowModel.AFP">
+        <MappingFragment StoreEntitySet="AFP">
+          <ScalarProperty Name="IdAFP" ColumnName="IdAFP" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cuenta">
+      <EntityTypeMapping TypeName="CashFlowModel.Cuenta">
+        <MappingFragment StoreEntitySet="Cuenta">
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
+          <ScalarProperty Name="IdTasa" ColumnName="IdTasa" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="Ahorros" ColumnName="Ahorros" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Familia">
+      <EntityTypeMapping TypeName="CashFlowModel.Familia">
+        <MappingFragment StoreEntitySet="Familia">
+          <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
+          <ScalarProperty Name="NombreGeneral" ColumnName="NombreGeneral" />
+          <ScalarProperty Name="CantidadIntegrantes" ColumnName="CantidadIntegrantes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gasto">
+      <EntityTypeMapping TypeName="CashFlowModel.Gasto">
+        <MappingFragment StoreEntitySet="Gasto">
+          <ScalarProperty Name="IdGasto" ColumnName="IdGasto" />
+          <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Impuestos">
+      <EntityTypeMapping TypeName="CashFlowModel.Impuestos">
+        <MappingFragment StoreEntitySet="Impuestos">
+          <ScalarProperty Name="IdImpuesto" ColumnName="IdImpuesto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Miembro">
+      <EntityTypeMapping TypeName="CashFlowModel.Miembro">
+        <MappingFragment StoreEntitySet="Miembro">
+          <ScalarProperty Name="IdMiembro" ColumnName="IdMiembro" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ocupacion">
+      <EntityTypeMapping TypeName="CashFlowModel.Ocupacion">
+        <MappingFragment StoreEntitySet="Ocupacion">
+          <ScalarProperty Name="IdOcupacion" ColumnName="IdOcupacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Periodo">
+      <EntityTypeMapping TypeName="CashFlowModel.Periodo">
+        <MappingFragment StoreEntitySet="Periodo">
+          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="CantDias" ColumnName="CantDias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="CashFlowModel.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
+          <ScalarProperty Name="IdMiembro" ColumnName="IdMiembro" />
+          <ScalarProperty Name="CantSueldosAño" ColumnName="CantSueldosAño" />
+          <ScalarProperty Name="SueldoNeto" ColumnName="SueldoNeto" />
+          <ScalarProperty Name="SueldoBruto" ColumnName="SueldoBruto" />
+          <ScalarProperty Name="IdAFP" ColumnName="IdAFP" />
+          <ScalarProperty Name="IdImpuesto" ColumnName="IdImpuesto" />
+          <ScalarProperty Name="IdOcupacion" ColumnName="IdOcupacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasa">
+      <EntityTypeMapping TypeName="CashFlowModel.Tasa">
+        <MappingFragment StoreEntitySet="Tasa">
+          <ScalarProperty Name="IdTasa" ColumnName="IdTasa" />
+          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Gasto">
+      <EntityTypeMapping TypeName="CashFlowModel.Tipo_Gasto">
+        <MappingFragment StoreEntitySet="Tipo_Gasto">
+          <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
+          <ScalarProperty Name="NombreTipo" ColumnName="NombreTipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

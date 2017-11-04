@@ -1,0 +1,91 @@
+﻿@model CashFlowFinance.ViewModels.Home.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="wraper container">
+
+            <div class="row">
+                <div class="col-md-3 col-lg-12">
+                    <div class="profile-detail card-box">
+                        <div>
+
+                            <h1>
+                                Bienvenido a Cash-Flow Familia<span class="m-l-15">@Model.NombreFamilia</span>
+                            </h1>
+
+                            <hr>
+
+                            <img src="~/Content/images/users/avatar-2.jpg" class="img-circle" alt="profile-image">
+
+
+                            <div class="list-inline status-list m-t-20">
+                                <p class="text-muted font-600"><strong>S/.</strong><span class="text-primary m-b-100">@Model.Ahorro</span></p>
+                                <p class="text-muted">Dinero Actual</p>
+                            </div>
+
+                            <hr>
+
+                            <h4 class="text-uppercase font-600">Sobre Nosotros!!!</h4>
+
+                            <div >
+                                <div class="text-muted">
+                                    <p class="text-muted font-13"><strong>Nombre Familiar :</strong> <span class="m-l-15">@Model.NombreFamilia</span></p>
+
+                                    <p class="text-muted font-13"><strong>Telefono :</strong><span class="m-l-15">@Model.Telefono</span></p>
+
+                                    <p class="text-muted font-13"><strong>Correo :</strong> <span class="m-l-15">@Model.Correo</span></p>
+
+                                    <p class="text-muted font-13"><strong>Integrantes :</strong> <span class="m-l-15">@Model.Integrantes</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-18 col-lg-12">
+                    <div class="profile-detail card-box">
+                        <h4 class="text-uppercase font-600">Miembros!!!</h4>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-1.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 1</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-2.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 2</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-3.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 3</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-4.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 3</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-5.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 3</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-6.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 3</h4>
+                                </td>
+                                <td>
+                                    <img src="~/Content/images/users/avatar-7.jpg" class="img-circle" alt="profile-image">
+                                    <h4>nombre 3</h4>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div> <!-- container -->
+        </div> <!-- content -->
+    </div>
+</div>

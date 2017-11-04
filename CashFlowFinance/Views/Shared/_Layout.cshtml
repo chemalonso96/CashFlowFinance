@@ -1,43 +1,69 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <link rel="shortcut icon" href="assets/images/favicon_1.ico">
+
+    <title>Ubold - Responsive Admin Dashboard Template</title>
+
+    <link href="@Url.Content("~/Content/css/custombox.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/core.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/components.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/icons.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/pages.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/responsive.css")" rel="stylesheet" type="text/css" />
+
+    <script src="assets/js/modernizr.min.js"></script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-69506598-1', 'auto');
+          ga('send', 'pageview');
+    </script>
+
+</head>
+<body class="fixed-left">
+    <div id="wrapper">
+        @{ Html.RenderPartial("_Topbar");}
+        @{ Html.RenderPartial("_LeftSidebar");}
+        @RenderBody()
+        @{ Html.RenderPartial("_StartRight");}
+        <footer class="footer">
+            © 2016. All rights reserved.
+        </footer>
+        <script>
+            var resizefunc = [];
+        </script>
+
+        <!-- jQuery  -->
+        <script src="@Url.Content("~/Content/js/jquery.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/detect.js")"></script>
+        <script src="@Url.Content("~/Content/js/fastclick.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.slimscroll.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+        <script src="@Url.Content("~/Content/js/waves.js")"></script>
+        <script src="@Url.Content("~/Content/js/wow.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.nicescroll.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.scrollTo.min.js")"></script>
+
+
+        <script src="@Url.Content("~/Content/js/jquery.core.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.app.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+
+        <script src="@Url.Content("~/Content/js/custombox.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/legacy.min.js")"></script>
+    </div>
 </body>
 </html>

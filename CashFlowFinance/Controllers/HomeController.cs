@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Transactions;
+using CashFlowFinance.Models;
+using CashFlowFinance.ViewModels.Home;
 
 namespace CashFlowFinance.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Home(Int32? CuentaId)
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+            CashFlowEntities DB = new CashFlowEntities();
+            var viewModel = new HomeViewModel();
+            viewModel.CargarDatos(DB, CuentaId);
+            return View(viewModel);
+        }   
     }
 }

@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CashFlowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AFP">
+    <Key>
+      <PropertyRef Name="IdAFP" />
+    </Key>
+    <Property Name="IdAFP" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Porcentaje" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__IdAFP__25869641" FromRole="AFP" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="IdCuenta" />
+    </Key>
+    <Property Name="IdCuenta" Type="Int32" Nullable="false" />
+    <Property Name="IdFamilia" Type="Int32" Nullable="false" />
+    <Property Name="IdTasa" Type="Int32" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ahorros" Type="Double" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Familia" Relationship="Self.FK__Cuenta__IdFamili__2B3F6F97" FromRole="Cuenta" ToRole="Familia" />
+    <NavigationProperty Name="Tasa" Relationship="Self.FK__Cuenta__IdTasa__2C3393D0" FromRole="Cuenta" ToRole="Tasa" />
+  </EntityType>
+  <EntityType Name="Familia">
+    <Key>
+      <PropertyRef Name="IdFamilia" />
+    </Key>
+    <Property Name="IdFamilia" Type="Int32" Nullable="false" />
+    <Property Name="NombreGeneral" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CantidadIntegrantes" Type="Int32" />
+    <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__IdFamili__2B3F6F97" FromRole="Familia" ToRole="Cuenta" />
+    <NavigationProperty Name="Gasto" Relationship="Self.FK__Gasto__IdFamilia__286302EC" FromRole="Familia" ToRole="Gasto" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__IdFamil__239E4DCF" FromRole="Familia" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Gasto">
+    <Key>
+      <PropertyRef Name="IdGasto" />
+    </Key>
+    <Property Name="IdGasto" Type="Int32" Nullable="false" />
+    <Property Name="IdTipoGasto" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IdFamilia" Type="Int32" Nullable="false" />
+    <Property Name="Costo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Familia" Relationship="Self.FK__Gasto__IdFamilia__286302EC" FromRole="Gasto" ToRole="Familia" />
+    <NavigationProperty Name="Tipo_Gasto" Relationship="Self.FK__Gasto__IdTipoGas__29572725" FromRole="Gasto" ToRole="Tipo_Gasto" />
+  </EntityType>
+  <EntityType Name="Impuestos">
+    <Key>
+      <PropertyRef Name="IdImpuesto" />
+    </Key>
+    <Property Name="IdImpuesto" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Porcentaje" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__IdImpue__267ABA7A" FromRole="Impuestos" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Miembro">
+    <Key>
+      <PropertyRef Name="IdMiembro" />
+    </Key>
+    <Property Name="IdMiembro" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__IdMiemb__276EDEB3" FromRole="Miembro" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Ocupacion">
+    <Key>
+      <PropertyRef Name="IdOcupacion" />
+    </Key>
+    <Property Name="IdOcupacion" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK__Persona__IdOcupa__24927208" FromRole="Ocupacion" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Periodo">
+    <Key>
+      <PropertyRef Name="IdPeriodo" />
+    </Key>
+    <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CantDias" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tasa" Relationship="Self.FK__Tasa__IdPeriodo__2A4B4B5E" FromRole="Periodo" ToRole="Tasa" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="IdPersona" />
+    </Key>
+    <Property Name="IdPersona" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdFamilia" Type="Int32" Nullable="false" />
+    <Property Name="IdMiembro" Type="Int32" Nullable="false" />
+    <Property Name="CantSueldosAño" Type="Int32" />
+    <Property Name="SueldoNeto" Type="Double" Nullable="false" />
+    <Property Name="SueldoBruto" Type="Double" Nullable="false" />
+    <Property Name="IdAFP" Type="Int32" />
+    <Property Name="IdImpuesto" Type="Int32" />
+    <Property Name="IdOcupacion" Type="Int32" />
+    <NavigationProperty Name="AFP" Relationship="Self.FK__Persona__IdAFP__25869641" FromRole="Persona" ToRole="AFP" />
+    <NavigationProperty Name="Familia" Relationship="Self.FK__Persona__IdFamil__239E4DCF" FromRole="Persona" ToRole="Familia" />
+    <NavigationProperty Name="Impuestos" Relationship="Self.FK__Persona__IdImpue__267ABA7A" FromRole="Persona" ToRole="Impuestos" />
+    <NavigationProperty Name="Miembro" Relationship="Self.FK__Persona__IdMiemb__276EDEB3" FromRole="Persona" ToRole="Miembro" />
+    <NavigationProperty Name="Ocupacion" Relationship="Self.FK__Persona__IdOcupa__24927208" FromRole="Persona" ToRole="Ocupacion" />
+  </EntityType>
+  <EntityType Name="Tasa">
+    <Key>
+      <PropertyRef Name="IdTasa" />
+    </Key>
+    <Property Name="IdTasa" Type="Int32" Nullable="false" />
+    <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+    <Property Name="Valor" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__IdTasa__2C3393D0" FromRole="Tasa" ToRole="Cuenta" />
+    <NavigationProperty Name="Periodo" Relationship="Self.FK__Tasa__IdPeriodo__2A4B4B5E" FromRole="Tasa" ToRole="Periodo" />
+  </EntityType>
+  <EntityType Name="Tipo_Gasto">
+    <Key>
+      <PropertyRef Name="IdTipoGasto" />
+    </Key>
+    <Property Name="IdTipoGasto" Type="Int32" Nullable="false" />
+    <Property Name="NombreTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Gasto" Relationship="Self.FK__Gasto__IdTipoGas__29572725" FromRole="Tipo_Gasto" ToRole="Gasto" />
+  </EntityType>
+  <Association Name="FK__Persona__IdAFP__25869641">
+    <End Role="AFP" Type="Self.AFP" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AFP">
+        <PropertyRef Name="IdAFP" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="IdAFP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cuenta__IdFamili__2B3F6F97">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="IdFamilia" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="IdFamilia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cuenta__IdTasa__2C3393D0">
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasa">
+        <PropertyRef Name="IdTasa" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="IdTasa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Gasto__IdFamilia__286302EC">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="IdFamilia" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="IdFamilia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Persona__IdFamil__239E4DCF">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="IdFamilia" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="IdFamilia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Gasto__IdTipoGas__29572725">
+    <End Role="Tipo_Gasto" Type="Self.Tipo_Gasto" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Gasto">
+        <PropertyRef Name="IdTipoGasto" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="IdTipoGasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Persona__IdImpue__267ABA7A">
+    <End Role="Impuestos" Type="Self.Impuestos" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Impuestos">
+        <PropertyRef Name="IdImpuesto" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="IdImpuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Persona__IdMiemb__276EDEB3">
+    <End Role="Miembro" Type="Self.Miembro" Multiplicity="1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miembro">
+        <PropertyRef Name="IdMiembro" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="IdMiembro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Persona__IdOcupa__24927208">
+    <End Role="Ocupacion" Type="Self.Ocupacion" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ocupacion">
+        <PropertyRef Name="IdOcupacion" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="IdOcupacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tasa__IdPeriodo__2A4B4B5E">
+    <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Periodo">
+        <PropertyRef Name="IdPeriodo" />
+      </Principal>
+      <Dependent Role="Tasa">
+        <PropertyRef Name="IdPeriodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CashFlowEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AFP" EntityType="Self.AFP" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+    <EntitySet Name="Familia" EntityType="Self.Familia" />
+    <EntitySet Name="Gasto" EntityType="Self.Gasto" />
+    <EntitySet Name="Impuestos" EntityType="Self.Impuestos" />
+    <EntitySet Name="Miembro" EntityType="Self.Miembro" />
+    <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" />
+    <EntitySet Name="Periodo" EntityType="Self.Periodo" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" />
+    <EntitySet Name="Tasa" EntityType="Self.Tasa" />
+    <EntitySet Name="Tipo_Gasto" EntityType="Self.Tipo_Gasto" />
+    <AssociationSet Name="FK__Persona__IdAFP__25869641" Association="Self.FK__Persona__IdAFP__25869641">
+      <End Role="AFP" EntitySet="AFP" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cuenta__IdFamili__2B3F6F97" Association="Self.FK__Cuenta__IdFamili__2B3F6F97">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cuenta__IdTasa__2C3393D0" Association="Self.FK__Cuenta__IdTasa__2C3393D0">
+      <End Role="Tasa" EntitySet="Tasa" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Gasto__IdFamilia__286302EC" Association="Self.FK__Gasto__IdFamilia__286302EC">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Persona__IdFamil__239E4DCF" Association="Self.FK__Persona__IdFamil__239E4DCF">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Gasto__IdTipoGas__29572725" Association="Self.FK__Gasto__IdTipoGas__29572725">
+      <End Role="Tipo_Gasto" EntitySet="Tipo_Gasto" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Persona__IdImpue__267ABA7A" Association="Self.FK__Persona__IdImpue__267ABA7A">
+      <End Role="Impuestos" EntitySet="Impuestos" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Persona__IdMiemb__276EDEB3" Association="Self.FK__Persona__IdMiemb__276EDEB3">
+      <End Role="Miembro" EntitySet="Miembro" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Persona__IdOcupa__24927208" Association="Self.FK__Persona__IdOcupa__24927208">
+      <End Role="Ocupacion" EntitySet="Ocupacion" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tasa__IdPeriodo__2A4B4B5E" Association="Self.FK__Tasa__IdPeriodo__2A4B4B5E">
+      <End Role="Periodo" EntitySet="Periodo" />
+      <End Role="Tasa" EntitySet="Tasa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
