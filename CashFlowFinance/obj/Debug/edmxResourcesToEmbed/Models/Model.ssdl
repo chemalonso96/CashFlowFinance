@@ -31,6 +31,7 @@
     <Property Name="FamiliaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NombreGeneral" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CantidadIntegrantes" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="varchar" MaxLength="300" />
   </EntityType>
   <EntityType Name="Gasto">
     <Key>
@@ -57,6 +58,7 @@
     </Key>
     <Property Name="MiembroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Picture" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Ocupacion">
     <Key>
@@ -72,6 +74,22 @@
     <Property Name="PeriodoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CantDias" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaId" />
+    </Key>
+    <Property Name="PersonaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="FamiliaId" Type="int" />
+    <Property Name="MiembroId" Type="int" />
+    <Property Name="SueldoAnio" Type="float" />
+    <Property Name="SueldoNeto" Type="float" />
+    <Property Name="SueldoBruto" Type="float" />
+    <Property Name="AFPId" Type="int" />
+    <Property Name="ImpuestoId" Type="int" />
+    <Property Name="OcupacionId" Type="int" />
   </EntityType>
   <EntityType Name="Tasa">
     <Key>
@@ -136,6 +154,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Persona_AFP">
+    <End Role="AFP" Type="Self.AFP" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AFP">
+        <PropertyRef Name="AFPId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="AFPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Familia">
+    <End Role="Familia" Type="Self.Familia" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Familia">
+        <PropertyRef Name="FamiliaId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="FamiliaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Impuesto">
+    <End Role="Impuesto" Type="Self.Impuesto" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Impuesto">
+        <PropertyRef Name="ImpuestoId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="ImpuestoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Miembro">
+    <End Role="Miembro" Type="Self.Miembro" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miembro">
+        <PropertyRef Name="MiembroId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="MiembroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Ocupacion">
+    <End Role="Ocupacion" Type="Self.Ocupacion" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ocupacion">
+        <PropertyRef Name="OcupacionId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="OcupacionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Tasa_Periodo">
     <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
     <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
@@ -157,6 +235,7 @@
     <EntitySet Name="Miembro" EntityType="Self.Miembro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Periodo" EntityType="Self.Periodo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tasa" EntityType="Self.Tasa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoGasto" EntityType="Self.TipoGasto" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Cuenta_Familia" Association="Self.FK_Cuenta_Familia">
@@ -174,6 +253,26 @@
     <AssociationSet Name="FK_Gasto_TipoGasto" Association="Self.FK_Gasto_TipoGasto">
       <End Role="TipoGasto" EntitySet="TipoGasto" />
       <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_AFP" Association="Self.FK_Persona_AFP">
+      <End Role="AFP" EntitySet="AFP" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Familia" Association="Self.FK_Persona_Familia">
+      <End Role="Familia" EntitySet="Familia" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Impuesto" Association="Self.FK_Persona_Impuesto">
+      <End Role="Impuesto" EntitySet="Impuesto" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Miembro" Association="Self.FK_Persona_Miembro">
+      <End Role="Miembro" EntitySet="Miembro" />
+      <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Ocupacion" Association="Self.FK_Persona_Ocupacion">
+      <End Role="Ocupacion" EntitySet="Ocupacion" />
+      <End Role="Persona" EntitySet="Persona" />
     </AssociationSet>
     <AssociationSet Name="FK_Tasa_Periodo" Association="Self.FK_Tasa_Periodo">
       <End Role="Periodo" EntitySet="Periodo" />

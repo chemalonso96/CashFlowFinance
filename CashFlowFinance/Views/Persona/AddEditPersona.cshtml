@@ -1,0 +1,76 @@
+﻿@model CashFlowFinance.ViewModels.Personas.AddEditPersona
+
+@{
+    ViewBag.Title = "AddEditPersona";
+}
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="wraper container">
+            <div class="row">
+                <div class="col-md-3 col-lg-12">
+                    <div class="col-lg-6">
+                        <h5><b>Registrar Miembro</b></h5>
+
+                        <form class="form-horizontal group-border-dashed" action="#">
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Nombre, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                   @Html.TextBoxFor(x => x.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Apellido, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.Apellido, new { @type = "text", @class = "form-control", @placeholder = "Apellido" })
+                                </div>
+                            </div>
+                            <!--List-->
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Miembro, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.DropDownListFor(x => x.MiembroId, new SelectList(Model.LstMiembro, "MiembroId", "Nombre"), "[-SELECCIONE-]", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.SueldoNeto, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(x => x.SueldoNeto, new { @type = "text", @class = "form-control", @placeholder = "Sueldo Neto" }) 
+                                </div>
+                            </div>
+                            <!--List-->
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.AFPId, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" required data-parsley-max="6" placeholder="Max value is 6" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.AFPId, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-6">
+                                    <input class="form-control" required type="textrange" min="6" max="100" placeholder="Number between 6 - 100" />
+                                </div>
+                            </div>
+
+                            <div class="form-group m-b-0">
+                                <div class="col-sm-offset-3 col-sm-9 m-t-15">
+                                    <button type="submit" class="btn btn-primary">
+                                        Guardar
+                                    </button>
+                                    <button type="reset" class="btn btn-default m-l-5">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
