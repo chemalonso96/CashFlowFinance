@@ -10,6 +10,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Banco">
+      <EntityTypeMapping TypeName="CashFlowModel.Banco">
+        <MappingFragment StoreEntitySet="Banco">
+          <ScalarProperty Name="BancoId" ColumnName="BancoId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cuenta">
       <EntityTypeMapping TypeName="CashFlowModel.Cuenta">
         <MappingFragment StoreEntitySet="Cuenta">
@@ -107,6 +115,7 @@
           <ScalarProperty Name="TasaId" ColumnName="TasaId" />
           <ScalarProperty Name="PeriodoId" ColumnName="PeriodoId" />
           <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="BancoId" ColumnName="BancoId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

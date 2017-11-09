@@ -6,7 +6,7 @@ using CashFlowFinance.Models;
 
 namespace CashFlowFinance.ViewModels.Personas
 {
-    public class ListPersona
+    public class ListPersonaViewModel
     {
         public List<Persona> LstPersona = new List<Persona>();
 

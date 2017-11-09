@@ -9,6 +9,14 @@
     <Property Name="Porcentaje" Type="Double" Nullable="false" />
     <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_AFP" FromRole="AFP" ToRole="Persona" />
   </EntityType>
+  <EntityType Name="Banco">
+    <Key>
+      <PropertyRef Name="BancoId" />
+    </Key>
+    <Property Name="BancoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tasa" Relationship="Self.FK_Tasa_Banco" FromRole="Banco" ToRole="Tasa" />
+  </EntityType>
   <EntityType Name="Cuenta">
     <Key>
       <PropertyRef Name="CuentaId" />
@@ -115,6 +123,8 @@
     <Property Name="TasaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PeriodoId" Type="Int32" Nullable="false" />
     <Property Name="Valor" Type="Double" Nullable="false" />
+    <Property Name="BancoId" Type="Int32" />
+    <NavigationProperty Name="Banco" Relationship="Self.FK_Tasa_Banco" FromRole="Tasa" ToRole="Banco" />
     <NavigationProperty Name="Cuenta" Relationship="Self.FK_Cuenta_Tasa" FromRole="Tasa" ToRole="Cuenta" />
     <NavigationProperty Name="Periodo" Relationship="Self.FK_Tasa_Periodo" FromRole="Tasa" ToRole="Periodo" />
   </EntityType>
@@ -135,6 +145,18 @@
       </Principal>
       <Dependent Role="Persona">
         <PropertyRef Name="AFPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasa_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="BancoId" />
+      </Principal>
+      <Dependent Role="Tasa">
+        <PropertyRef Name="BancoId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -248,6 +270,7 @@
   </Association>
   <EntityContainer Name="CashFlowEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AFP" EntityType="Self.AFP" />
+    <EntitySet Name="Banco" EntityType="Self.Banco" />
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
     <EntitySet Name="Familia" EntityType="Self.Familia" />
     <EntitySet Name="Gasto" EntityType="Self.Gasto" />
@@ -261,6 +284,10 @@
     <AssociationSet Name="FK_Persona_AFP" Association="Self.FK_Persona_AFP">
       <End Role="AFP" EntitySet="AFP" />
       <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasa_Banco" Association="Self.FK_Tasa_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Tasa" EntitySet="Tasa" />
     </AssociationSet>
     <AssociationSet Name="FK_Cuenta_Familia" Association="Self.FK_Cuenta_Familia">
       <End Role="Familia" EntitySet="Familia" />

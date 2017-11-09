@@ -1,4 +1,4 @@
-﻿@model CashFlowFinance.ViewModels.Personas.AddEditPersona
+﻿@model CashFlowFinance.ViewModels.Personas.AddEditPersonaViewModel
 
 @{
     ViewBag.Title = "AddEditPersona";
@@ -13,45 +13,50 @@
                     <div class="col-lg-6">
                         <h5><b>Registrar Miembro</b></h5>
 
-                        <form class="form-horizontal group-border-dashed" action="#">
-
+                        <form class="form-horizontal group-border-dashed" method="post">
+                            @Html.HiddenFor(x=>x.PersonaId)
                             <div class="form-group">
-                                @Html.LabelFor(x => x.Nombre, new { @class = "col-sm-3 control-label" })
+                                <label class="col-sm-3 control-label">Nombre</label>
                                 <div class="col-sm-6">
                                    @Html.TextBoxFor(x => x.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.Apellido, new { @class = "col-sm-3 control-label" })
+                                <label class="col-sm-3 control-label">Apellido</label>
                                 <div class="col-sm-6">
                                     @Html.TextBoxFor(x => x.Apellido, new { @type = "text", @class = "form-control", @placeholder = "Apellido" })
                                 </div>
                             </div>
                             <!--List-->
                             <div class="form-group">
-                                @Html.LabelFor(x => x.Miembro, new { @class = "col-sm-3 control-label" })
+                                <label class="col-sm-3 control-label">Miembro</label>
                                 <div class="col-sm-6">
-                                    @Html.DropDownListFor(x => x.MiembroId, new SelectList(Model.LstMiembro, "MiembroId", "Nombre"), "[-SELECCIONE-]", new { @class = "form-control" })
+                                    @Html.DropDownListFor(x => x.MiembroId, new SelectList(Model.LstMiembro, "MiembroId", "Nombre" ), "[-SELECCIONE-]", new { @class = "form-control" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(x => x.SueldoNeto, new { @class = "col-sm-3 control-label" })
+                                <label class="col-sm-3 control-label">Sueldo Bruto</label>
                                 <div class="col-sm-6">
-                                    @Html.TextBoxFor(x => x.SueldoNeto, new { @type = "text", @class = "form-control", @placeholder = "Sueldo Neto" }) 
-                                </div>
-                            </div>
-                            <!--List-->
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.AFPId, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" required data-parsley-max="6" placeholder="Max value is 6" />
+                                    @Html.TextBoxFor(x => x.SueldoBruto, new { @type = "text", @class = "form-control", @placeholder = "Sueldo Bruto" }) 
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(x => x.AFPId, new { @class = "col-sm-3 control-label" })
+                                <label class="col-sm-3 control-label">AFP</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" required type="textrange" min="6" max="100" placeholder="Number between 6 - 100" />
+                                    @Html.DropDownListFor(x => x.AFPId, new  SelectList(Model.LstAFP, "AFPId", "Nombre"), "[-SELECCIONE-]", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Impuesto</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownListFor(x => x.ImpuestoId, new SelectList(Model.LstImpuesto, "ImpuestoId", "Nombre"), "[-SELECCIONE-]", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class = "col-sm-3 control-label">Ocupacion</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownListFor(x => x.OcupacionId, new SelectList(Model.LstOcupacion, "OcupacionId", "Nombre"), "[-SELECCIONE-]", new { @class = "form-control" })
                                 </div>
                             </div>
 

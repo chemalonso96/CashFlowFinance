@@ -34,11 +34,18 @@ namespace CashFlowFinance.Controllers
 
             if (cuenta != null)
             {
-                Session["CORREO"] = cuenta.Correo;
+                Session["USERNAME"] = cuenta.Username;
                 Session["CONTRASEÑA"] = cuenta.Contrasenia;
                 Session["CUENTAID"] = cuenta.CuentaId;
                 //ME REDIRECCIONA A ESTA PARTE 
-                return RedirectToAction("Home", "Home", new { CuentaId = cuenta.CuentaId });
+                if (cuenta.FamiliaId.HasValue)
+                {
+                    return RedirectToAction("Home", "Home", new { CuentaId = cuenta.CuentaId });
+                }
+                else
+                {
+                    return RedirectToAction("Home", "Home");
+                }
             }
             return View(model);
         }

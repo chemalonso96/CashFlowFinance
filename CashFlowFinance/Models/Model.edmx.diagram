@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a857f0c2d5334aa28ff9200f692a5eff" Name="Diagram1">
+        <EntityTypeShape EntityType="CashFlowModel.AFP" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Banco" Width="1.5" PointX="1.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Cuenta" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Familia" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Gasto" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Impuesto" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Miembro" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Ocupacion" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Periodo" Width="1.5" PointX="1.5" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Persona" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.Tasa" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CashFlowModel.TipoGasto" Width="1.5" PointX="3.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="CashFlowModel.FK_Persona_AFP" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Tasa_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Cuenta_Familia" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Cuenta_Tasa" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Gasto_Familia" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Persona_Familia" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Gasto_TipoGasto" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Persona_Impuesto" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Persona_Miembro" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Persona_Ocupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="CashFlowModel.FK_Tasa_Periodo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

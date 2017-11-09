@@ -22,17 +22,18 @@ namespace CashFlowFinance.ViewModels.Home
             LstMiembro = BD.Miembro.ToList();
             this.CuentaId = cuentaId;
 
+            if (cuentaId.HasValue)
+            {
+                var cuenta = BD.Cuenta.First(x => x.CuentaId == cuentaId);
+                Ahorro = cuenta.Ahorro;
+                Telefono = cuenta.Telefono;
+                Correo = cuenta.Correo;
+                Ahorro = cuenta.Ahorro;
 
-            var cuenta = BD.Cuenta.First(x=>x.CuentaId == cuentaId);
-            Ahorro = cuenta.Ahorro;
-            Telefono = cuenta.Telefono;
-            Correo = cuenta.Correo;
-            Ahorro = cuenta.Ahorro;
-
-            var familia = BD.Familia.First(x=>x.FamiliaId == cuenta.FamiliaId);
-            NombreFamilia = familia.NombreGeneral;
-            Integrantes = familia.CantidadIntegrantes;
-
+                var familia = BD.Familia.First(x => x.FamiliaId == cuenta.FamiliaId);
+                NombreFamilia = familia.NombreGeneral;
+                Integrantes = familia.CantidadIntegrantes;
+            }
         }
     }
 }

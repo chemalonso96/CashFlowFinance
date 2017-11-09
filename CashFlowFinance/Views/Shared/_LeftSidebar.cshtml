@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "_LeftSidebar";
 }
@@ -21,7 +22,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="ion-person-stalker"></i> <span> Miembros </span> <span class="menu-arrow"></span> </a>
                     <ul class="list-unstyled">
                         <!--aca un buble de ls integrantes de la familia-->
-                        <li><a href="ui-buttons.html">Agregar Miembro</a></li>
+                        <li><a href="@Url.Action("AddEditPersona", "Persona")" >Agregar Miembro</a></li>
                     </ul>
                 </li>
 
@@ -38,11 +39,6 @@
                         <li><a href="components-grid.html">Grid</a></li>
                     </ul>
                 </li>
-
-
-
-              
-
                 <li class="text-muted menu-title">More</li>
             </ul>
             <div class="clearfix"></div>

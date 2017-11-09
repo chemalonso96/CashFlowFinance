@@ -8,6 +8,13 @@
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Porcentaje" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="Banco">
+    <Key>
+      <PropertyRef Name="BancoId" />
+    </Key>
+    <Property Name="BancoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cuenta">
     <Key>
       <PropertyRef Name="CuentaId" />
@@ -98,6 +105,7 @@
     <Property Name="TasaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PeriodoId" Type="int" Nullable="false" />
     <Property Name="Valor" Type="float" Nullable="false" />
+    <Property Name="BancoId" Type="int" />
   </EntityType>
   <EntityType Name="TipoGasto">
     <Key>
@@ -214,6 +222,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Tasa_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="BancoId" />
+      </Principal>
+      <Dependent Role="Tasa">
+        <PropertyRef Name="BancoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Tasa_Periodo">
     <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
     <End Role="Tasa" Type="Self.Tasa" Multiplicity="*" />
@@ -228,6 +248,7 @@
   </Association>
   <EntityContainer Name="CashFlowModelStoreContainer">
     <EntitySet Name="AFP" EntityType="Self.AFP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Familia" EntityType="Self.Familia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gasto" EntityType="Self.Gasto" Schema="dbo" store:Type="Tables" />
@@ -273,6 +294,10 @@
     <AssociationSet Name="FK_Persona_Ocupacion" Association="Self.FK_Persona_Ocupacion">
       <End Role="Ocupacion" EntitySet="Ocupacion" />
       <End Role="Persona" EntitySet="Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasa_Banco" Association="Self.FK_Tasa_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Tasa" EntitySet="Tasa" />
     </AssociationSet>
     <AssociationSet Name="FK_Tasa_Periodo" Association="Self.FK_Tasa_Periodo">
       <End Role="Periodo" EntitySet="Periodo" />
