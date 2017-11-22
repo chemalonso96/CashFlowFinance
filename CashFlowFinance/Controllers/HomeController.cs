@@ -11,11 +11,11 @@ namespace CashFlowFinance.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Home(Int32? CuentaId)
+        public ActionResult Home(Int32? FamiliaId)
         {
             CashFlowEntities DB = new CashFlowEntities();
             var viewModel = new HomeViewModel();
-            viewModel.CargarDatos(DB, CuentaId);
+            viewModel.CargarDatos(DB, FamiliaId);
             return View(viewModel);
         }   
     }

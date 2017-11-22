@@ -1,0 +1,53 @@
+﻿@model CashFlowFinance.ViewModels.CashFlow.ViewCashFlowViewModel
+@{
+    ViewBag.Title = "ViewCashFlow";
+    int mes = 1;
+}
+
+<h2>ViewCashFlow</h2>
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="wraper container">
+
+            <div class="col-lg-12 col-md-15">
+                <div class="card-box">
+                    <h4 class="text-primary m-b-5 header-title"><b>Historial de gastos</b></h4>
+                    <br />
+                    <form class="form-horizontal" role="form" data-parsley-validate="" novalidate="">
+
+                        <div class="p-20">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th># Mes</th>
+                                        <th>Saldo Inicial</th>
+                                        <th>Mes</th>
+                                        <th>Nummero Dias</th>
+                                        <th>Tasa</th>
+                                        <th>Saldo Final</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var flujo in Model.LstFlujoCaja) {
+                                    <tr>
+                                        <th scope="row">@(mes++)</th>
+                                        <td>@flujo.SaldoInicial</td>
+                                        <td>@flujo.Mes</td>
+                                        <td>@flujo.NumeroDias</td>
+                                        <td>@flujo.Tasas</td>
+                                        <td>@flujo.SaldoFinal</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
+     </div>
+</div>

@@ -7,7 +7,18 @@
 <!-- ========== Left Sidebar Start ========== -->
 
 <div class="left side-menu">
-    <div class="sidebar-inner slimscrollleft">
+    <div class="sidebar-iGoogle
+
+
+13611/Persona
+
+
+TodoMapsImágenesVídeosNoticiasMás
+PreferenciasHerramientas
+Cerca de 161,000 resultados (0.41 segundos) 
+Resultados de búsqueda
+The Publications of the Surtees Society
+https://books.google.com.pe/books?id=m5owAQAAMAAJ - Tranner slimscrollleft">
         <!--- Divider -->
         <div id="sidebar-menu">
             <ul>
@@ -15,31 +26,24 @@
                 <li class="text-muted menu-title">Navigation</li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
+                    <a href="@Url.Action("Home", "Home", new { FamiliaId = Convert.ToInt32(Session["FAMILIAID"])})" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ion-person-stalker"></i> <span> Miembros </span> <span class="menu-arrow"></span> </a>
-                    <ul class="list-unstyled">
-                        <!--aca un buble de ls integrantes de la familia-->
-                        <li><a href="@Url.Action("AddEditPersona", "Persona")" >Agregar Miembro</a></li>
-                    </ul>
+                    <a href="@Url.Action("AddEditPersona", "Persona")" class="waves-effect"><i class="ion-person-stalker"></i> <span> Añadir Miembros </span> </a>            
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ion-social-bitcoin-outline"></i> <span> Flujo de Caja </span> <span class="menu-arrow"></span> </a>
-                    <ul class="list-unstyled">
-                        <li><a href="icons-glyphicons.html">Glyphicons</a></li>
-                    </ul>
+                    <a href="@Url.Action("CashFlow","CashFlow", new { FamiliaId = Convert.ToInt32(Session["FAMILIAID"])})" class="waves-effect"><i class="ion-social-bitcoin-outline"></i> <span> Flujo de Caja</span> </a>
                 </li>
 
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="ion-pie-graph"></i><span> Estadistica Familiar </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="components-grid.html">Grid</a></li>
+                        <li><a href="@Url.Action("GraficaIngreso","Grafica", new {FamiliaId = Convert.ToInt32(Session["FAMILIAID"])})">Diagrama de ingresos</a></li>
+                        <li><a href="@Url.Action("GraficaGasto","Grafica", new {FamiliaId = Convert.ToInt32(Session["FAMILIAID"])})">Diagrama de gastos</a></li>
                     </ul>
                 </li>
-                <li class="text-muted menu-title">More</li>
             </ul>
             <div class="clearfix"></div>
         </div>

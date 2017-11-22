@@ -32,8 +32,8 @@ namespace CashFlowFinance.Controllers
             try
             {
                 var DB = new CashFlowEntities();
-                var dato = Convert.ToInt32(Session["CUENTAID"]);
-                var cuenta = DB.Cuenta.FirstOrDefault(x => x.CuentaId == dato);
+                Int32 dato = Convert.ToInt32(Session["FAMILIAID"]);
+                var familia = DB.Familia.FirstOrDefault(x => x.FamiliaId == dato);
                 if (!ModelState.IsValid)
                 {
                     model.CargarDato(DB, model.PersonaId);
@@ -44,6 +44,7 @@ namespace CashFlowFinance.Controllers
                 {
 
                     var persona = new Persona();
+                    var family = new Familia();
                     //con la session obtienes el id de la cuenta que te va ayudar a sacar el ID
                     //de la familia (Y)
                     
@@ -55,19 +56,34 @@ namespace CashFlowFinance.Controllers
                     {
                         DB.Persona.Add(persona);
                     }
+
+                    var afp = DB.AFP.First(x=>x.AFPId == model.AFPId);
+                    var impuesto = DB.Impuesto.First(x => x.ImpuestoId == model.ImpuestoId);
+
                     persona.Nombre = model.Nombre;
                     persona.Apellido = model.Apellido;
-                    persona.FamiliaId = cuenta.FamiliaId;
                     persona.MiembroId = model.MiembroId;
+                    persona.FamiliaId = Convert.ToInt32(Session["FAMILIAID"]);
                     persona.SueldoBruto = model.SueldoBruto;
+                    //calculula mos el sueldo neto
+                    persona.SueldoNeto = model.SueldoBruto - (afp.Porcentaje * model.SueldoBruto) - (afp.Seguro * model.SueldoBruto) - (afp.Comision * model.SueldoBruto) - (impuesto.Porcentaje * model.SueldoBruto);
+                    persona.SueldoAnio = (model.SueldoBruto - (afp.Porcentaje * model.SueldoBruto) - (afp.Seguro * model.SueldoBruto) - (afp.Comision * model.SueldoBruto) - (impuesto.Porcentaje * model.SueldoBruto)) * 14;
                     persona.AFPId = model.AFPId;
                     persona.ImpuestoId = model.ImpuestoId;
                     persona.OcupacionId = model.OcupacionId;
+                    persona.Essalud = 0.09;
+
+                    //verificando si la familia tiene un id para hacer un EDITAR
+                    if (persona.FamiliaId.HasValue)
+                    {
+                        family = DB.Familia.First(x => x.FamiliaId == persona.FamiliaId);
+                    }
+                    family.CantidadIntegrantes = family.CantidadIntegrantes + 1;
 
                     DB.SaveChanges();
                     ts.Complete();
                 }
-                return RedirectToAction("Home", "Home",new { CuentaId = cuenta.CuentaId});
+                return RedirectToAction("Home", "Home", new { FamiliaId = familia.FamiliaId });
             }
             catch (Exception e)
             {

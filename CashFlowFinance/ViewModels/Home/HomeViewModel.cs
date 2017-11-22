@@ -8,29 +8,26 @@ namespace CashFlowFinance.ViewModels.Home
 {
     public class HomeViewModel
     {
-        public Int32? CuentaId { set; get; }
+        public Int32? FamiliaId { set; get; }
         public String ImagenFamilia { set; get; }
-        public Double Ahorro { set; get; }
+        public Double? Ahorro { set; get; }
         public String NombreFamilia { set; get; }
         public Int32? Telefono { set; get; }
         public String Correo { set; get; }
         public Int32 Integrantes { set; get; }
-        public List<Miembro> LstMiembro { set; get; }
-        public void CargarDatos(CashFlowEntities BD, Int32? cuentaId)
+        public List<Persona> LstPersona { set; get; } = new List<Persona>();
+        public void CargarDatos(CashFlowEntities BD, Int32? familiaId)
         {
             BD = new CashFlowEntities();
-            LstMiembro = BD.Miembro.ToList();
-            this.CuentaId = cuentaId;
+            this.FamiliaId = familiaId;
+            LstPersona = BD.Persona.ToList();
 
-            if (cuentaId.HasValue)
+            if (familiaId.HasValue)
             {
-                var cuenta = BD.Cuenta.First(x => x.CuentaId == cuentaId);
-                Ahorro = cuenta.Ahorro;
-                Telefono = cuenta.Telefono;
-                Correo = cuenta.Correo;
-                Ahorro = cuenta.Ahorro;
-
-                var familia = BD.Familia.First(x => x.FamiliaId == cuenta.FamiliaId);
+                var familia = BD.Familia.First(x => x.FamiliaId == familiaId);
+                Telefono = familia.Cuenta.Telefono;
+                Correo = familia.Cuenta.Correo;
+                Ahorro = familia.Ahorro;
                 NombreFamilia = familia.NombreGeneral;
                 Integrantes = familia.CantidadIntegrantes;
             }

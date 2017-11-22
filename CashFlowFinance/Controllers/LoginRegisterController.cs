@@ -30,25 +30,18 @@ namespace CashFlowFinance.Controllers
             }
             //BASE DE DATOS
             var context = new CashFlowEntities();
-            var cuenta = context.Cuenta.FirstOrDefault(x=>x.Username == model.Username && x.Contrasenia == model.Password);
-
+            var cuenta = context.Cuenta.First(x=>x.Username == model.Username && x.Contrasenia == model.Password);
+            var familia = context.Familia.First(x => x.CuentaId == cuenta.CuentaId);
             if (cuenta != null)
             {
                 Session["USERNAME"] = cuenta.Username;
                 Session["CONTRASEÑA"] = cuenta.Contrasenia;
                 Session["CUENTAID"] = cuenta.CuentaId;
-                //ME REDIRECCIONA A ESTA PARTE 
-                if (cuenta.FamiliaId.HasValue)
-                {
-                    return RedirectToAction("Home", "Home", new { CuentaId = cuenta.CuentaId });
-                }
-                else
-                {
-                    return RedirectToAction("Home", "Home");
-                }
+                Session["FAMILIAID"] = familia.FamiliaId;
             }
-            return View(model);
+            return RedirectToAction("Home", "Home", new { FamiliaId = familia.FamiliaId });
         }
+
         public ActionResult Register()
         {
             var viewModel = new RegisterViewModel();
@@ -90,6 +83,54 @@ namespace CashFlowFinance.Controllers
                     context.SaveChanges();
                     transaction.Complete();
                     
+                }
+                return RedirectToAction("RegisterFamily", new { Username = model.Username});
+            }
+            catch (Exception ex)
+            {
+                return View(model);
+            }
+        }
+
+        public ActionResult RegisterFamily(Int32? FamiliaId, String Username)
+        {
+            var viewModel = new RegisterFamilyViewModel();
+            var context = new CashFlowEntities();
+            viewModel.cargarDato(context,FamiliaId, Username);
+            Session["CUENTAIDREGISTER"] = viewModel.CuentaId;
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult RegisterFamily(RegisterFamilyViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var context = new CashFlowEntities();
+                using (var ts = new TransactionScope()){
+                    var familia = new Familia();
+                    var cuenta = new Cuenta();
+                    if (model.FamiliaId.HasValue)
+                    {
+                        familia = context.Familia.FirstOrDefault(x => x.FamiliaId == model.FamiliaId);
+                    }
+                    else
+                    {
+                        context.Familia.Add(familia);
+                    }
+                    
+                    familia.NombreGeneral = model.NombreCompleto;
+                    familia.CantidadIntegrantes = Convert.ToInt32(model.CantIntegrantes);
+                    familia.CuentaId = Convert.ToInt32(Session["CUENTAIDREGISTER"]);
+                    familia.Ahorro = 0;
+                    //tasa
+                    //imagen
+                    context.SaveChanges();
+                    ts.Complete();
                 }
                 return RedirectToAction("Login");
             }

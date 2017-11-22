@@ -44,6 +44,7 @@ namespace CashFlowFinance.ViewModels.Personas
                 this.MiembroId = Persona.MiembroId;
                 //this.SueldoAnio = Persona.SueldoAnio;
                 //this.SueldoNeto = Persona.SueldoNeto;
+                //EsSalud
                 this.SueldoBruto = Persona.SueldoBruto;
                 this.AFPId = Persona.AFPId;
                 this.ImpuestoId = Persona.ImpuestoId;

@@ -1,0 +1,57 @@
+﻿@model CashFlowFinance.ViewModels.Grafica.GraficaIngresoViewModel
+@{
+    ViewBag.Title = "GraficaIngreso";
+}
+<div class="content-page">
+    <div class="content">
+        <div class="wraper container">
+            <div class="row">
+                <div class="col-md-18 col-lg-18">
+                    <div class="profile-detail card-box">
+                        <div>
+                            <div id="container" style="min-width: 380px; height: 550px; max-width: 690px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container -->
+        </div> <!-- content -->
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        Highcharts.chart('container', {
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45
+                }
+            },
+            title: {
+                text: 'Grafica de ingresos por integrantes de familia'
+            },
+            subtitle: {
+                text: ''
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 100,
+                    depth: 45
+                }
+            },
+            series: [{
+                name: 'Total: S/.',
+                data: [
+                    @foreach (var dato in Model.LstReporte)
+                    {
+                        <text>
+                        ['@dato.NombrePersona', @dato.TotalIngreso],
+                        </text>
+                    }
+                ]
+            }]
+        });
+    </script>
+}
+
